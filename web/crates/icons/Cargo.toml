@@ -1,0 +1,20 @@
+[package]
+name = "icons"
+version = "1.0.0"
+authors = ["nrz"]
+homepage = "https://ui.zweers.ch/icons"
+repository = "https://git.zweers.ch/nicorenezweers/nrzUI/src/branch/main/crates/icons"
+edition = "2024"
+description = "Lucide-Icons fuer Dioxus (aus nrzUI)."
+license = "MIT"
+readme = "./README.md"
+publish = false
+
+[dependencies]
+dioxus = { version = "0.7", optional = true }
+strum = { version = "0.28", features = ["derive"] }
+tw_merge = { path = "../tw_merge/tw_merge" }
+
+[features]
+dioxus = ["dep:dioxus"]
+dioxus_animated = ["dioxus"]

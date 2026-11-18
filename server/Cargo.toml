@@ -1,0 +1,39 @@
+[package]
+name = "nrzanalytics"
+description = "nrzAnalytics: datenschutzfreundliche Webanalyse (Server, axum + SQLite) – liefert API, Tracking-Skript und Weboberflaeche aus"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+build = "build.rs"
+
+[dependencies]
+nrzanalytics_shared.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+axum = { version = "0.8", features = ["macros"] }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "signal", "fs", "net", "time", "sync"] }
+tower = { version = "0.5", features = ["util"] }
+tower-http = { version = "0.6", features = ["compression-gzip", "compression-br", "limit"] }
+rusqlite = { version = "0.37", features = ["bundled", "functions"] }
+argon2 = { version = "0.5", features = ["std"] }
+rand = "0.8"
+sha2 = "0.10"
+sha1 = "0.10"
+hmac = "0.12"
+base64 = "0.22"
+data-encoding = "2"
+chrono = { version = "0.4", default-features = false, features = ["std", "clock"] }
+chrono-tz = "0.10"
+regex = "1"
+url = "2"
+ipnet = "2"
+maxminddb = "0.26"
+flate2 = "1"
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls", "gzip"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+mime_guess = "2"
+
+[dev-dependencies]
+http-body-util = "0.1"

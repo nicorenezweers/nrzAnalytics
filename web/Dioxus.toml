@@ -1,0 +1,8 @@
+[application]
+name = "nrzanalytics_web"
+
+[web.app]
+title = "nrzAnalytics"
+
+[serve]
+port = 8080

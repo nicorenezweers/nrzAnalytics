@@ -1,0 +1,14 @@
+/target
+/web/target
+/web/dist
+# Erzeugt von xtask/build.rs aus web/theme.rs bzw. von Tailwind (dx)
+/web/tailwind.css
+/web/assets/tailwind.css
+/data
+/release
+.env
+*.db
+*.db-shm
+*.db-wal
+*.mmdb
+.DS_Store

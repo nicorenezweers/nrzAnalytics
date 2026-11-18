@@ -1,0 +1,3 @@
+[alias]
+# Build-, Entwicklungs- und Release-Werkzeuge in Rust (statt Shell-Skripten): cargo xtask help
+xtask = "run --quiet --package xtask --"

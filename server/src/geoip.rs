@@ -32,11 +32,8 @@ pub struct GeoIp {
     message: RwLock<String>,
 }
 
-fn name_of<'a>(names: &Option<std::collections::BTreeMap<&'a str, &'a str>>) -> String {
-    names
-        .as_ref()
-        .and_then(|n| n.get("de").or_else(|| n.get("en")).map(|s| (*s).to_string()))
-        .unwrap_or_default()
+fn name_of(names: &geoip2::Names<'_>) -> String {
+    names.german.or(names.english).unwrap_or_default().to_string()
 }
 
 impl GeoIp {
@@ -96,20 +93,14 @@ impl GeoIp {
 
     pub fn lookup(&self, ip: IpAddr) -> Option<Location> {
         let reader = self.reader.read().ok()?.clone()?;
-        let city: geoip2::City<'_> = reader.lookup(ip).ok()??;
-        let country = city
-            .country
-            .as_ref()
-            .and_then(|c| c.iso_code)
-            .unwrap_or_default()
-            .to_ascii_uppercase();
+        let city: geoip2::City<'_> = reader.lookup(ip).ok()?.decode().ok()??;
+        let country = city.country.iso_code.unwrap_or_default().to_ascii_uppercase();
         if country.len() != 2 {
             return None;
         }
         let (region, region_name) = city
             .subdivisions
-            .as_ref()
-            .and_then(|s| s.first())
+            .first()
             .map(|s| match s.iso_code {
                 Some(code) if !code.is_empty() => (
                     format!("{country}-{}", code.to_ascii_uppercase()),
@@ -118,7 +109,7 @@ impl GeoIp {
                 _ => (String::new(), String::new()),
             })
             .unwrap_or_default();
-        let city_name = city.city.as_ref().map(|c| name_of(&c.names)).unwrap_or_default();
+        let city_name = name_of(&city.city.names);
         Some(Location {
             country,
             region,

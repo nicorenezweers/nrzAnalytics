@@ -2,7 +2,7 @@ manifestVersion: 1
 id: nrz-analytics
 category: developer
 name: nrzAnalytics
-version: "1.0.0"
+version: "1.1.0"
 tagline: "Datenschutzfreundliche Webanalyse wie Plausible - in Rust"
 icon: http://100.78.107.162:8390/nicorenezweers/nrzStore/raw/branch/main/nrz-analytics/icon.png
 port: 8580
@@ -67,9 +67,8 @@ description: >-
   machen und die oeffentliche URL in der Verwaltung eintragen, damit das
   Snippet die richtige Adresse nutzt.
 releaseNotes: >-
-  Snippet nutzt die oeffentliche Adresse ohne admin., Kopieren-Knopf funktioniert
-  auch ohne HTTPS, Diagrammlinie endet beim laufenden Abschnitt, Website-Umschalter
-  im Dashboard nur einmal.
+  Sicherheits-Updates: SQLite (rusqlite 0.41), maxminddb 0.27, cookie 0.18.3
+  und url 2.5.9.
 developer: nrz
 website: http://100.78.107.162:8390/nicorenezweers/nrzAnalytics
 submitter: nrz
